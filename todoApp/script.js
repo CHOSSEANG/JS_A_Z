@@ -33,6 +33,17 @@ function createTodoElement(item){
 
     const checkboxEl = document.createElement('input');
     checkboxEl.type = 'checkbox';
+    
+    // 할일 체크에 따른 이벤트 추가
+     checkboxEl.addEventListener('change',()=>{
+        item.complete = checkboxEl.checked;
+
+        if(item.complete){
+            itemEl.classList.add('complete');
+        } else {
+            itemEl.classList.remove('complete'); 
+        }
+     })
 
      if(item.complete) {
         itemEl.classList.add('complete');
@@ -43,6 +54,16 @@ function createTodoElement(item){
      inputEl.value=item.text;
      inputEl.setAttribute('disabled','');
 
+     // todo 작성했을 때 item 객체에 해당 내용 저장하는 이벤트 추가
+     inputEl.addEventListener('input',() => {
+        item.text = inputEl.value;
+     });
+    
+     // 체크박스 바깥을 눌렀을 때 수정 불가 기능
+     inputEl.addEventListener('blur',()=>{
+        inputEl.setAttribute('disabled','');
+     })
+
      const actionsEl = document.createElement('div');
      actionsEl.classList.add('actions');
 
@@ -50,9 +71,22 @@ function createTodoElement(item){
      editBtnEl.classList.add('material-icons'); 
      editBtnEl.innerText='edit';
 
+    // 수정 버튼 클릭 이벤트 추가
+     editBtnEl.addEventListener('click',()=>{
+        inputEl.removeAttribute('disabled');
+        inputEl.focus(); 
+     })
+
      const removeBtnEl = document.createElement('button');
      removeBtnEl.classList.add('material-icons','remove-btn');
      removeBtnEl.innerText='remove_circles';
+
+    // 삭제 버튼 이벤트 추가
+     removeBtnEl.addEventListener('click',()=>{
+        todos = todos.filter(t => t.id !== item.id);
+
+        itemEl.remove();
+     })
 
      actionsEl.append(editBtnEl);
      actionsEl.append(removeBtnEl);
