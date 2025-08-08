@@ -48,11 +48,11 @@ function createTodoElement(item){
 
      const editBtnEl = document.createElement('button');
      editBtnEl.classList.add('material-icons'); 
-     editBtnEl.text='edit';
+     editBtnEl.innerText='edit';
 
      const removeBtnEl = document.createElement('button');
      removeBtnEl.classList.add('material-icons','remove-btn');
-     removeBtnEl.innerText='remove_cicles';
+     removeBtnEl.innerText='remove_circles';
 
      actionsEl.append(editBtnEl);
      actionsEl.append(removeBtnEl);
