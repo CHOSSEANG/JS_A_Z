@@ -9,6 +9,7 @@ let tens = 0;
 let interval;
 
 buttonStart.onclick = function() {
+    if(interval) clearInterval(interval);
     interval = setInterval(startTimer, 10); 
 }
 
@@ -20,8 +21,16 @@ buttonReset.onclick = function() {
     clearInterval(interval);
     seconds = 0;
     tens = 0;
-    appendTens.innerText = 0;
-    appendSeconds.innerText = 0;
+    appendTens.innerText = changeToString(0);
+    appendSeconds.innerText = changeToString(0);
+}
+
+function changeToString(num){
+    if(num<=9){
+        return "0"+num;
+    } else{
+        return ""+ num;
+    }
 }
 
 function startTimer(){
@@ -31,11 +40,11 @@ function startTimer(){
         // seconds 1올리기
         seconds++;
         // appendSeconds에도 반영하기
-        appendSeconds.innerText = seconds;
+        appendSeconds.innerText = changeToString(seconds);
         // tens, appendsTens => 0
         tens = 0;
-        appendTens.innerText = 0;
+        appendTens.innerText = changeToString(0);
     } else {
-        appendTens.innerText = tens;
+        appendTens.innerText = changeToString(tens);
     }
 }
