@@ -25,6 +25,8 @@ function createNewTodo(){
      inputEl.removeAttribute('disabled');
 
      inputEl.focus();
+
+     saveToLocalStorage(); 
 }
 
 function createTodoElement(item){
@@ -33,16 +35,19 @@ function createTodoElement(item){
 
     const checkboxEl = document.createElement('input');
     checkboxEl.type = 'checkbox';
+    checkboxEl.checked = item.complete;
     
     // 할일 체크에 따른 이벤트 추가
      checkboxEl.addEventListener('change',()=>{
         item.complete = checkboxEl.checked;
 
         if(item.complete){
-            itemEl.classList.add('complete');
+            itemEl.classList.add('complete'); 
         } else {
             itemEl.classList.remove('complete'); 
         }
+
+        saveToLocalStorage();
      })
 
      if(item.complete) {
@@ -62,6 +67,8 @@ function createTodoElement(item){
      // 체크박스 바깥을 눌렀을 때 수정 불가 기능
      inputEl.addEventListener('blur',()=>{
         inputEl.setAttribute('disabled','');
+
+        saveToLocalStorage();
      })
 
      const actionsEl = document.createElement('div');
@@ -86,6 +93,8 @@ function createTodoElement(item){
         todos = todos.filter(t => t.id !== item.id);
 
         itemEl.remove();
+
+        saveToLocalStorage();
      })
 
      actionsEl.append(editBtnEl);
@@ -97,3 +106,30 @@ function createTodoElement(item){
 
      return {itemEl, inputEl, editBtnEl, removeBtnEl};
     }
+
+    function saveToLocalStorage(){
+        const data = JSON.stringify(todos);
+
+        localStorage.setItem('myTodos',data);
+    }
+
+    function loadFromLocalStorage(){
+        const data = localStorage.getItem('myTodos');
+
+        if(data){
+            todos = JSON.parse(data);
+        }
+    }
+
+    function displayTodos(){
+        loadFromLocalStorage();
+
+        for(let i = 0; i < todos.length; i++){
+            const element = todos[i];
+            const {itemEl} = createTodoElement(element);
+
+            list.append(itemEl);
+        }
+    }
+
+    displayTodos();
