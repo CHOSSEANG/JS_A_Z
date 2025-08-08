@@ -15,6 +15,25 @@ class Cell{
     }
 }
 
+function createCellEl(cell){
+    const cellEl = document.createElement('input');
+    cellEl.className = "cell";
+    cellEl.id = "cell_" + cell.row + cell.column;
+    cellEl.value = cell.data;
+    cellEl.disabled = cell.disabled;
+
+    return cellEl;
+}
+
+function drawSheet(){
+    for(let i = 0; i < spreadsheet.length; i++){
+        for(let j = 0; j < spreadsheet[i].length;j++){
+            const cell = spreadsheet[i][j];
+            spreadSheetContainer.append(createCellEl(cell));
+        }
+    }
+}
+
 function initSpreadSheet(){
     for(let i =0; i < ROWS; i++){
         let spreadsheetRow = [];
@@ -24,6 +43,7 @@ function initSpreadSheet(){
         }
         spreadsheet.push(spreadsheetRow);
     }
+    drawSheet();
     console.log(spreadsheet);
 }
 
