@@ -1,4 +1,5 @@
 const spreadSheetContainer = document.getElementById('spreadsheet-container');
+const exportBtn = document.getElementById('export-btn');
 const ROWS = 10;
 const COLS = 10;
 
@@ -35,8 +36,13 @@ function createCellEl(cell){
     }
 
     cellEl.onclick = () => {onclickhandler(cell)};
+    cellEl.onchange= (e) => {changeHanlder(e.target.value,cell)}
 
     return cellEl;
+}
+
+function changeHanlder(value,cell){
+    cell.data = value;
 }
 
 function onclickhandler(cell){
@@ -47,7 +53,7 @@ function onclickhandler(cell){
     const rowHeaderEl = getHeaderCell(rowHeader.row,rowHeader.column);
     columnHeaderEl.classList.add('active');
     rowHeaderEl.classList.add('active');
-    console.log('clicked cell',columnHeaderEl,rowHeaderEl);
+    // console.log('clicked cell',columnHeaderEl,rowHeaderEl);
 }
 
 function getHeaderCell(row, col) {
@@ -115,7 +121,12 @@ function initSpreadSheet(){
         spreadsheet.push(spreadsheetRow);
     }
     drawSheet();
+    // console.log(spreadsheet);
+}
+
+exportBtn.onclick = () => {
     console.log(spreadsheet);
 }
+
 
 initSpreadSheet();
