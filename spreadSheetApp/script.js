@@ -34,7 +34,23 @@ function createCellEl(cell){
         cellEl.classList.add('header');
     }
 
+    cellEl.onclick = () => {onclickhandler(cell)};
+
     return cellEl;
+}
+
+function onclickhandler(cell){
+    const columnHeader = spreadsheet[0][cell.column];
+    const rowHeader = spreadsheet[cell.row][0];
+    const columnHeaderEl = getHeaderCell(columnHeader.row,columnHeader.column);
+    const rowHeaderEl = getHeaderCell(rowHeader.row,rowHeader.column);
+    columnHeaderEl.classList.add('active');
+    rowHeaderEl.classList.add('active');
+    console.log('clicked cell',columnHeaderEl,rowHeaderEl);
+}
+
+function getHeaderCell(row, col) {
+    return document.querySelector("#cell_"+row+col);
 }
 
 function drawSheet(){
@@ -69,7 +85,7 @@ function initSpreadSheet(){
             if( i===0 ){
                 cellData = alphabets[j-1];
                 isHeader = true;
-                isDisabled = true;
+                isDisabled = true; 
             }
 
             if( !cellData ){
