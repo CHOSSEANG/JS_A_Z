@@ -11,10 +11,12 @@ const alphabets = [
 ];
 
 class Cell{
-    constructor(isHeader, disabled, data, row, column, active = false) {
+    constructor(isHeader, disabled, data,rowName,colName, row, column, active = false) {
          this.isHeader = isHeader;
          this.disabled = disabled;
          this.data = data;
+         this.rowName = rowName;
+         this.colName = colName;
          this.row = row;
          this.column = column;
          this.active = active;
@@ -78,7 +80,11 @@ function initSpreadSheet(){
             if(cellData<=0){
                 cellData="";
             }
-            const cell = new Cell(isHeader, isDisabled, cellData, i, j, false)
+
+            let rowName = i;
+            let colName = alphabets[j-1];
+
+            const cell = new Cell(isHeader, isDisabled, cellData,rowName,colName, i, j, false)
             spreadsheetRow.push(cell);
         }
         spreadsheet.push(spreadsheetRow);
