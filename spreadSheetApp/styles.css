@@ -17,7 +17,7 @@
    width: 80px;
    border: 1px solid lightgray;
    outline: none; 
-   box-sizing: border-box;
+   box-sizing: border-box; 
  }
 
  .cell.header {
