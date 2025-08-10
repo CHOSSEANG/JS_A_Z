@@ -54,17 +54,20 @@ function initSpreadSheet(){
         for(let j = 0; j < COLS; j++){
             let cellData="";
             let isHeader = false;
+            let isDisabled = false;
             
             // 모든 row의 첫번째 column에 숮자 넣기
             if( j ===0 ){
                 cellData = i;
-                isHeader = true; 
+                isHeader = true;
+                isDisabled = true;
             }
 
             // 모든 column의 첫번째 row에 알파벳
             if( i===0 ){
                 cellData = alphabets[j-1];
                 isHeader = true;
+                isDisabled = true;
             }
 
             if( !cellData ){
@@ -75,7 +78,7 @@ function initSpreadSheet(){
             if(cellData<=0){
                 cellData="";
             }
-            const cell = new Cell(isHeader, false, cellData, i, j, false)
+            const cell = new Cell(isHeader, isDisabled, cellData, i, j, false)
             spreadsheetRow.push(cell);
         }
         spreadsheet.push(spreadsheetRow);
