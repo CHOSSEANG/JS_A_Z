@@ -3,6 +3,12 @@ const ROWS = 10;
 const COLS = 10;
 
 const spreadsheet= [];
+const alphabets = [
+  "A", "B", "C", "D", "E", "F", "G",
+  "H", "I", "J", "K", "L", "M", "N",
+  "O", "P", "Q", "R", "S", "T", "U",
+  "V", "W", "X", "Y", "Z"
+];
 
 class Cell{
     constructor(isHeader, disabled, data, row, column, active = false) {
@@ -27,10 +33,14 @@ function createCellEl(cell){
 
 function drawSheet(){
     for(let i = 0; i < spreadsheet.length; i++){
+        const rowContainerEl = document.createElement('div');
+        rowContainerEl.className="cell-row";
+
         for(let j = 0; j < spreadsheet[i].length;j++){
             const cell = spreadsheet[i][j];
-            spreadSheetContainer.append(createCellEl(cell));
+            rowContainerEl.append(createCellEl(cell))
         }
+        spreadSheetContainer.append(rowContainerEl);
     }
 }
 
@@ -38,7 +48,27 @@ function initSpreadSheet(){
     for(let i =0; i < ROWS; i++){
         let spreadsheetRow = [];
         for(let j = 0; j < COLS; j++){
-            const cell = new Cell(false, false, i + "-" + j, i, j, false)
+            let cellData="";
+            
+            // 모든 row의 첫번째 column에 숮자 넣기
+            if( j ===0 ){
+                cellData = i;
+            }
+
+            // 모든 column의 첫번째 row에 알파벳
+            if( i===0 ){
+                cellData = alphabets[j-1];
+            }
+
+            if( !cellData ){
+                cellData="";
+            }
+
+            // 첫 번째 row의 column은 빈 칸으로 설정
+            if(cellData<=0){
+                cellData="";
+            }
+            const cell = new Cell(false, false, cellData, i, j, false)
             spreadsheetRow.push(cell);
         }
         spreadsheet.push(spreadsheetRow);

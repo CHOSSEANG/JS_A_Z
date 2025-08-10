@@ -7,3 +7,15 @@
     margin-bottom: 10px;
     cursor: pointer;
  }
+
+ .cell-row {
+   display:flex;
+ }
+
+ .cell {
+   height: 40px;
+   width: 80px;
+   border: 1px solid lightgray;
+   outline: none; 
+   box-sizing: border-box;
+ }
