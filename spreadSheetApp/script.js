@@ -124,24 +124,62 @@ function initSpreadSheet(){
     // console.log(spreadsheet);
 }
 
-exportBtn.onclick = () => {
+exportBtn.onclick = async () => {
     let csv = "";
 
     for(let i =0;i<spreadsheet.length;i++){
-        if (i===0) continue;
         csv += spreadsheet[i]
-                .filter(item => !item.isHeader)
                 .map(item => item.data)
                 .join(',')+"\r\n";
     }
+    console.log('csv  :', csv);
 
-    const csvObj = new Blob([csv]);
-    const csvUrl = URL.createObjectURL(csvObj);
-    console.log('csvUrl :',csvUrl);
+    const workBook = new ExcelJS.Workbook();
+    const workSheet = workBook.addWorksheet('spread sheet');
+
+    for(let i = 0; i < spreadsheet.length; i++){
+        workSheet.addRow(spreadsheet[i].map(item => item.data));
+    }
+
+    const headerRow = workSheet.getRow(1);
+    const headerColumn = workSheet.getColumn(1);
+
+     headerRow.eachCell(cell => {
+            cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FFDDD' }  // #ddd 배경색
+            };
+            cell.alignment = {
+                horizontal: 'center'  // 텍스트 가운데 정렬
+            };
+        });
+
+        headerColumn.eachCell(cell => {
+        cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'FFDDD' }  // #ddd 배경색
+        };
+        cell.alignment = {
+            horizontal: 'center'  // 텍스트 가운데 정렬
+        };
+    });
+
+    const buffer = await workBook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { 
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' 
+    });
+
+
+
+    // const csvObj = new Blob([buffer[]]);
+    const csvUrl = URL.createObjectURL(blob);
+    // console.log('csvUrl :',csvUrl);
 
     const a = document.createElement('a');
     a.href = csvUrl;
-    a.download = 'spreadsheet name.csv';
+    a.download = 'spreadsheet name.xlsx';
     a.click();
 }
 
