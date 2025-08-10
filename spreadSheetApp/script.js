@@ -153,6 +153,12 @@ exportBtn.onclick = async () => {
             cell.alignment = {
                 horizontal: 'center'  // 텍스트 가운데 정렬
             };
+            cell.border = {
+                top: { style: 'thin', color: { argb: 'FF000000' } },
+                left: { style: 'thin', color: { argb: 'FF000000' } },
+                bottom: { style: 'thin', color: { argb: 'FF000000' } },
+                right: { style: 'thin', color: { argb: 'FF000000' } }
+            };
         });
 
         headerColumn.eachCell(cell => {
@@ -163,6 +169,12 @@ exportBtn.onclick = async () => {
         };
         cell.alignment = {
             horizontal: 'center'  // 텍스트 가운데 정렬
+        };
+        cell.border = {
+            top: { style: 'thin', color: { argb: 'FF000000' } },
+            left: { style: 'thin', color: { argb: 'FF000000' } },
+            bottom: { style: 'thin', color: { argb: 'FF000000' } },
+            right: { style: 'thin', color: { argb: 'FF000000' } }
         };
     });
 
