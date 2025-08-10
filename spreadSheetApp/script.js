@@ -40,6 +40,7 @@ function createCellEl(cell){
 }
 
 function onclickhandler(cell){
+    clearHeaderActiveStatus();
     const columnHeader = spreadsheet[0][cell.column];
     const rowHeader = spreadsheet[cell.row][0];
     const columnHeaderEl = getHeaderCell(columnHeader.row,columnHeader.column);
@@ -51,6 +52,14 @@ function onclickhandler(cell){
 
 function getHeaderCell(row, col) {
     return document.querySelector("#cell_"+row+col);
+}
+
+function clearHeaderActiveStatus(){
+    const headers = document.querySelectorAll('.header');
+
+    headers.forEach((header)=>{
+        header.classList.remove('active');
+    })
 }
 
 function drawSheet(){
