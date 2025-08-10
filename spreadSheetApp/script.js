@@ -128,12 +128,21 @@ exportBtn.onclick = () => {
     let csv = "";
 
     for(let i =0;i<spreadsheet.length;i++){
+        if (i===0) continue;
         csv += spreadsheet[i]
                 .filter(item => !item.isHeader)
                 .map(item => item.data)
                 .join(',')+"\r\n";
     }
-    console.log("csv : ",csv);
+
+    const csvObj = new Blob([csv]);
+    const csvUrl = URL.createObjectURL(csvObj);
+    console.log('csvUrl :',csvUrl);
+
+    const a = document.createElement('a');
+    a.href = csvUrl;
+    a.download = 'spreadsheet name.csv';
+    a.click();
 }
 
 
