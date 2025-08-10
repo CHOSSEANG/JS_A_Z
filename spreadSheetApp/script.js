@@ -53,7 +53,7 @@ function onclickhandler(cell){
     const rowHeaderEl = getHeaderCell(rowHeader.row,rowHeader.column);
     columnHeaderEl.classList.add('active');
     rowHeaderEl.classList.add('active');
-    // console.log('clicked cell',columnHeaderEl,rowHeaderEl);
+    document.querySelector('#cell-status').innerHTML = cell.colName + "" + cell.rowName;
 }
 
 function getHeaderCell(row, col) {
