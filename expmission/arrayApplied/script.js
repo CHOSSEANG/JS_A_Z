@@ -1,6 +1,6 @@
 let userArray = [];
 
-userArray.push({name:"John",age:18});
+userArray.push({name:"John",age:10});
 userArray.push({name:"Thomas",age:30});
 userArray.push({name:"Neo",age:20});
 
@@ -10,6 +10,16 @@ function findAllArray(){
     })
 }
 
+function ageAverage(){
+    let value = 0;
+    userArray.forEach((user)=>{
+        value += user.age;
+    })
+
+    return value / userArray.length;
+}
+
 console.log('findAllArray');
 findAllArray();
+console.log(ageAverage());
 
