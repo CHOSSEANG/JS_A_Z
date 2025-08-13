@@ -21,5 +21,6 @@ function ageAverage(){
 
 console.log('findAllArray');
 findAllArray();
+console.log('age Average')
 console.log(ageAverage());
 
