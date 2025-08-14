@@ -3,18 +3,41 @@
 <head>
     <title>조성훈의 자기소개</title>
     <style>
+    :root {
+        --primary:#FFFFFF;
+        --secondary:lightgreen;
+        --text:black;
+        --box-intro:rgba(173, 216, 230, 0.4); 
+        --box-bootcamp:rgba(240,128,128,0.4);
+        --border:black;
+    }
+    :root.darkTheme{
+        --primary:#000000;
+        --secondary:#999999;
+        --text:#FAFAFA;
+        --box-intro:darkblue;
+        --box-bootcamp:darkred;
+        --border: white;
+    }
+    #all-main{
+        background-color:var(--primary);
+        position: relative;
+        z-index:1;
+    }
     .introduce-main > div > h1{
-        background-color: black;
+        background-color: var(--secondary);
         text-align: center;
         padding: 5px;
         border-radius: 20px;
-        color: white;
+        color: var(--text);
     }
 
     .introduce-main{
         display: flex;
         margin : 10px 10px;
         justify-content: space-between;
+        z-index:2;
+        color:var(--text);
     }
 
     .introduce-main > div {
@@ -30,44 +53,50 @@
     }
 
     .introduce-myself{
-        background-color: rgba(173, 216, 230, 0.4);;
+        background-color: var(--box-intro);
+        z-index:2;
     }
 
-    .depp-dive-bootcamp{
+    .deep-dive-bootcamp{
         background-color: rgba(240,128,128,0.4);
+        z-index:2;
     }
     </style>
 </head>
 <body>
-    <div class="introduce-main">
-        <div class="introduce-myself">
-            <h1>자기소개</h1>
-            <h3>이름</h3>
-            <ul>
-                <li>조성훈</li>
-            </ul>
-            <h3>취미</h3>
-            <ul>
-                <li>기타</li>
-                <li>개발(이었으면 좋겠습니다.)</li>
-            </ul>
-        </div>
-        <div class="depp-dive-bootcamp">
-            <h1>딥다이브 부트캠프</h1>
-            <h3>부트캠프에서의 목표</h3>
-            <ul>
-                <li>아래와 같은 개발자가 되는 것이 목표입니다.</li>
+    <div id="all-main">
+        <button class="material-icon" id="toggleTheme">ThemeChange</button>
+        <button id="changeToColor">ChangeColor</button>
+        <div class="introduce-main">
+            <div class="introduce-myself" id="introduce-myself">
+                <h1 id="myself-header">자기소개</h1>
+                <h3>이름</h3>
                 <ul>
-                    <li>개발이 취미인 개발자</li>
-                    <li>질문을 많이 할 수 있는 개발자</li>
-                    <li>더 나은 서비스를 위해 고민할 수 있는 개발자</li>
+                    <li>조성훈</li>
                 </ul>
-            </ul>
-            <h3>목표를 위해 하고 있는 것</h3>
-            <ul>
-                <li>사이드 프로젝트를 주제로 팀빌딩을 시도하고 있습니다.</li>
-                <li>강의 내용 or 프로젝트 내용에 관련된 질문을 배움일기에 정리</li>
-            </ul>
+                <h3>취미</h3>
+                <ul>
+                    <li>기타</li>
+                    <li>개발(이었으면 좋겠습니다.)</li>
+                </ul>
+            </div>
+            <div class="deep-dive-bootcamp" id="deep-dive-bootcamp">
+                <h1 id="deep-dive-header">딥다이브 부트캠프</h1>
+                <h3>부트캠프에서의 목표</h3>
+                <ul>
+                    <li>아래와 같은 개발자가 되는 것이 목표입니다.</li>
+                    <ul>
+                        <li>개발이 취미인 개발자</li>
+                        <li>질문을 많이 할 수 있는 개발자</li>
+                        <li>더 나은 서비스를 위해 고민할 수 있는 개발자</li>
+                    </ul>
+                </ul>
+                <h3>목표를 위해 하고 있는 것</h3>
+                <ul>
+                    <li>사이드 프로젝트를 주제로 팀빌딩을 시도하고 있습니다.</li>
+                    <li>강의 내용 or 프로젝트 내용에 관련된 질문을 배움일기에 정리</li>
+                </ul>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
